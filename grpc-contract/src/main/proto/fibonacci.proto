@@ -1,9 +1,9 @@
 syntax = "proto3";
 
-package com.stratij;
+package com.stratij.fibonacci.grpc;
 
 option java_multiple_files = true;
-option java_package = "com.stratij";
+option java_package = "com.stratij.fibonacci.grpc";
 option java_outer_classname = "FibonacciProto";
 
 service FibonacciService {

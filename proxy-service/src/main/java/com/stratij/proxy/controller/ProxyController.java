@@ -1,8 +1,8 @@
 package com.stratij.proxy.controller;
 
-import com.stratij.FibonacciReply;
-import com.stratij.FibonacciRequest;
-import com.stratij.FibonacciServiceGrpc;
+import com.stratij.fibonacci.grpc.FibonacciReply;
+import com.stratij.fibonacci.grpc.FibonacciRequest;
+import com.stratij.fibonacci.grpc.FibonacciServiceGrpc;
 import net.devh.boot.grpc.client.inject.GrpcClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,9 +17,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyEmitter
 import javax.annotation.PreDestroy;
 import javax.validation.constraints.Min;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -42,7 +40,7 @@ public class ProxyController {
 
         executor.execute(() -> {
             Iterator<FibonacciReply> iterator = fibonacciStub.calcFibonacci(fibonacciRequest);
-            logger.info("Proceed fabonacci call with number " + number);
+            logger.info("Proceed fibonacci call with number " + number);
 
             try {
                 while (iterator.hasNext()) {

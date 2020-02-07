@@ -1,7 +1,7 @@
-package fibonacci.service;
+package com.stratij.fibonacci.service;
 
-import com.stratij.FibonacciReply;
-import com.stratij.FibonacciRequest;
+import com.stratij.fibonacci.grpc.FibonacciReply;
+import com.stratij.fibonacci.grpc.FibonacciRequest;
 import io.grpc.internal.testing.StreamRecorder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -1,8 +1,8 @@
-package fibonacci.service;
+package com.stratij.fibonacci.service;
 
-import com.stratij.FibonacciReply;
-import com.stratij.FibonacciRequest;
-import com.stratij.FibonacciServiceGrpc;
+import com.stratij.fibonacci.grpc.FibonacciReply;
+import com.stratij.fibonacci.grpc.FibonacciRequest;
+import com.stratij.fibonacci.grpc.FibonacciServiceGrpc;
 import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;
 

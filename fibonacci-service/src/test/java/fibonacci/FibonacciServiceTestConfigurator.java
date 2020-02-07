@@ -1,5 +1,6 @@
-package fibonacci.service;
+package fibonacci;
 
+import com.stratij.fibonacci.service.FibonacciService;
 import net.devh.boot.grpc.client.autoconfigure.GrpcClientAutoConfiguration;
 import net.devh.boot.grpc.server.autoconfigure.GrpcServerAutoConfiguration;
 import net.devh.boot.grpc.server.autoconfigure.GrpcServerFactoryAutoConfiguration;

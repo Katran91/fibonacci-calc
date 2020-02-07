@@ -1,8 +1,8 @@
-package fibonacci.service;
+package fibonacci;
 
-import com.stratij.FibonacciReply;
-import com.stratij.FibonacciRequest;
-import com.stratij.FibonacciServiceGrpc;
+import com.stratij.fibonacci.grpc.FibonacciReply;
+import com.stratij.fibonacci.grpc.FibonacciRequest;
+import com.stratij.fibonacci.grpc.FibonacciServiceGrpc;
 import net.devh.boot.grpc.client.inject.GrpcClient;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
