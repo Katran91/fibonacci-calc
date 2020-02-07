@@ -1,0 +1,5 @@
+rootProject.name = 'fibonacci-calc'
+
+include 'fibonacci-service'
+include 'proxy-service'
+include 'grpc-contract'
