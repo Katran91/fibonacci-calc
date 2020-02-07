@@ -6,16 +6,16 @@ import com.stratij.fibonacci.grpc.FibonacciServiceGrpc;
 import net.devh.boot.grpc.client.inject.GrpcClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyEmitter;
 
 import javax.annotation.PreDestroy;
-import javax.validation.constraints.Min;
+import javax.validation.constraints.PositiveOrZero;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.concurrent.ExecutorService;
@@ -23,17 +23,20 @@ import java.util.concurrent.Executors;
 
 @RestController
 @RequestMapping("/api")
+@Validated
 public class ProxyController {
     Logger logger = LoggerFactory.getLogger(ProxyController.class);
 
     @GrpcClient("fibonacci-service")
     private FibonacciServiceGrpc.FibonacciServiceBlockingStub fibonacciStub;
 
-    private ExecutorService executor = Executors.newSingleThreadExecutor();
+    @Autowired
+    @Qualifier("fixedThreadPool")
+    private ExecutorService executor;
 
-    @GetMapping("/fibonacci")
+    @GetMapping("/fibonacci/{fibonacciNumber}")
     public ResponseEntity<ResponseBodyEmitter> fibonacci(
-            @RequestParam(value = "fibonacciNumber", required = true) @Min(0) Integer number){
+            @PathVariable(value = "fibonacciNumber")  @PositiveOrZero Integer number){
         ResponseBodyEmitter emitter = new ResponseBodyEmitter();
 
         FibonacciRequest fibonacciRequest = FibonacciRequest.newBuilder().setNumber(number).build();
@@ -55,10 +58,5 @@ public class ProxyController {
         });
 
         return new ResponseEntity(emitter, HttpStatus.OK);
-    }
-
-    @PreDestroy
-    public void destroy() {
-        executor.shutdown();
     }
 }
