@@ -49,3 +49,6 @@ grpc.client.inProcess.address=in-process:test
 
 **protobuf-gradle-plugin** was used to simplify Protobuf compilation and to provide compile time dependency for gRPC client 
 and server.
+
+Gradle was used because its provides better way to handle multiprojects builds, 
+has an integration with protobuf.

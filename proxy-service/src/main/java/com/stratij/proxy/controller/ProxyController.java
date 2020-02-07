@@ -1,10 +1,7 @@
 package com.stratij.proxy.controller;
 
 import com.stratij.fibonacci.grpc.FibonacciReply;
-import com.stratij.fibonacci.grpc.FibonacciRequest;
-import com.stratij.fibonacci.grpc.FibonacciServiceGrpc;
 import com.stratij.proxy.service.FibonacciService;
-import net.devh.boot.grpc.client.inject.GrpcClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
