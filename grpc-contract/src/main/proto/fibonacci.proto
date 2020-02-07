@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package com.stratij;
+
+option java_multiple_files = true;
+option java_package = "com.stratij";
+option java_outer_classname = "FibonacciProto";
+
+service FibonacciService {
+    rpc CalcFibonacci (FibonacciRequest) returns (stream FibonacciReply) {
+    }
+}
+
+message FibonacciRequest {
+    int32 number = 1;
+}
+
+message FibonacciReply {
+    int32 message = 1;
+}
