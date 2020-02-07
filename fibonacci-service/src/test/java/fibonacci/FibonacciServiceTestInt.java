@@ -20,7 +20,7 @@ import static org.junit.Assert.assertEquals;
         "grpc.server.port=-1",
         "grpc.client.inProcess.address=in-process:test"
 })
-@SpringJUnitConfig(classes = { FibonacciServiceTestConfigurator.class })
+@SpringJUnitConfig(classes = {FibonacciServiceTestConfigurator.class})
 @DirtiesContext
 class FibonacciServiceTestInt {
     @GrpcClient("inProcess")
@@ -33,15 +33,15 @@ class FibonacciServiceTestInt {
 
         Iterator<FibonacciReply> iterator = fibonacciStub.calcFibonacci(fibonacciRequest);
         List<Integer> results = new ArrayList<>();
-        while (iterator.hasNext()){
+        while (iterator.hasNext()) {
             results.add(iterator.next().getMessage());
-         }
+        }
 
         assertEquals(5, results.size());
-        assertEquals(0,results.get(0).intValue());
-        assertEquals(1,results.get(1).intValue());
-        assertEquals(1,results.get(2).intValue());
-        assertEquals(2,results.get(3).intValue());
-        assertEquals(3,results.get(4).intValue());
+        assertEquals(0, results.get(0).intValue());
+        assertEquals(1, results.get(1).intValue());
+        assertEquals(1, results.get(2).intValue());
+        assertEquals(2, results.get(3).intValue());
+        assertEquals(3, results.get(4).intValue());
     }
 }

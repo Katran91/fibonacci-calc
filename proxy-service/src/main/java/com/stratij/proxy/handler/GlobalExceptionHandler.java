@@ -10,15 +10,25 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
+import javax.validation.ConstraintViolationException;
+
 @ControllerAdvice
 public class GlobalExceptionHandler {
-    Logger logger = LoggerFactory.getLogger(ProxyController.class);
+    private Logger logger = LoggerFactory.getLogger(ProxyController.class);
 
-    @ExceptionHandler(value = { MethodArgumentTypeMismatchException.class })
+    @ExceptionHandler(value = {MethodArgumentTypeMismatchException.class})
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     public ResponseEntity<String> handleWrongArguments(MethodArgumentTypeMismatchException e) {
         logger.warn(e.getMessage());
         return new ResponseEntity<>("Input isn't valid due to validation error: " + e.getMessage()
-                + " ---> Please provide positive number", HttpStatus.BAD_REQUEST);
+                + " ---> Please maximum fibonacci number", HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(value = {ConstraintViolationException.class})
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public ResponseEntity<String> handleWrongArguments(ConstraintViolationException e) {
+        logger.warn(e.getMessage());
+        return new ResponseEntity<>("Input isn't valid due to validation error: " + e.getMessage()
+                + " ---> Number shoul be 0 or greater", HttpStatus.BAD_REQUEST);
     }
 }

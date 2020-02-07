@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
         GrpcClientAutoConfiguration.class})
 public class FibonacciServiceTestConfigurator {
     @Bean
-    FibonacciService fibonacciService(){
+    FibonacciService fibonacciService() {
         return new FibonacciService();
     }
 }

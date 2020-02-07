@@ -9,7 +9,12 @@ dependencies {
 	compile 'net.devh:grpc-client-spring-boot-starter:2.6.2.RELEASE'
 	compile project(':grpc-contract')
 
+	testImplementation('junit:junit:4.13')
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+
+	test {
+		useJUnitPlatform()
 	}
 }

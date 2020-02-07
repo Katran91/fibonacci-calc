@@ -17,7 +17,7 @@ public class FibonacciService extends FibonacciServiceGrpc.FibonacciServiceImplB
 
         responseObserver.onNext(packResponse(0));
 
-        if(limit != 0) {
+        if (limit != 0) {
             do {
                 responseObserver.onNext(packResponse(currentNumber));
 

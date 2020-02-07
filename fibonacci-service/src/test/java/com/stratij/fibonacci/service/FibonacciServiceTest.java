@@ -16,7 +16,7 @@ class FibonacciServiceTest {
 
     @BeforeEach
     void setUp() {
-        fibonacciService =  new FibonacciService();
+        fibonacciService = new FibonacciService();
     }
 
     @Test
@@ -31,12 +31,12 @@ class FibonacciServiceTest {
         List<FibonacciReply> results = streamRecorder.getValues();
 
         assertEquals(6, results.size());
-        assertEquals(0,results.get(0).getMessage());
-        assertEquals(1,results.get(1).getMessage());
-        assertEquals(1,results.get(2).getMessage());
-        assertEquals(2,results.get(3).getMessage());
-        assertEquals(3,results.get(4).getMessage());
-        assertEquals(5,results.get(5).getMessage());
+        assertEquals(0, results.get(0).getMessage());
+        assertEquals(1, results.get(1).getMessage());
+        assertEquals(1, results.get(2).getMessage());
+        assertEquals(2, results.get(3).getMessage());
+        assertEquals(3, results.get(4).getMessage());
+        assertEquals(5, results.get(5).getMessage());
     }
 
     @Test
@@ -51,7 +51,7 @@ class FibonacciServiceTest {
         List<FibonacciReply> results = streamRecorder.getValues();
 
         assertEquals(1, results.size());
-        assertEquals(0,results.get(0).getMessage());
+        assertEquals(0, results.get(0).getMessage());
     }
 
     @Test
@@ -66,10 +66,10 @@ class FibonacciServiceTest {
         List<FibonacciReply> results = streamRecorder.getValues();
 
         assertEquals(5, results.size());
-        assertEquals(0,results.get(0).getMessage());
-        assertEquals(1,results.get(1).getMessage());
-        assertEquals(1,results.get(2).getMessage());
-        assertEquals(2,results.get(3).getMessage());
-        assertEquals(3,results.get(4).getMessage());
+        assertEquals(0, results.get(0).getMessage());
+        assertEquals(1, results.get(1).getMessage());
+        assertEquals(1, results.get(2).getMessage());
+        assertEquals(2, results.get(3).getMessage());
+        assertEquals(3, results.get(4).getMessage());
     }
 }

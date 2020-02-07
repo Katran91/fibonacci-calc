@@ -3,6 +3,7 @@ package com.stratij.proxy.controller;
 import com.stratij.fibonacci.grpc.FibonacciReply;
 import com.stratij.fibonacci.grpc.FibonacciRequest;
 import com.stratij.fibonacci.grpc.FibonacciServiceGrpc;
+import com.stratij.proxy.service.FibonacciService;
 import net.devh.boot.grpc.client.inject.GrpcClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,21 +15,19 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyEmitter;
 
-import javax.annotation.PreDestroy;
 import javax.validation.constraints.PositiveOrZero;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 @RestController
 @RequestMapping("/api")
 @Validated
 public class ProxyController {
-    Logger logger = LoggerFactory.getLogger(ProxyController.class);
+    private Logger logger = LoggerFactory.getLogger(ProxyController.class);
 
-    @GrpcClient("fibonacci-service")
-    private FibonacciServiceGrpc.FibonacciServiceBlockingStub fibonacciStub;
+    @Autowired
+    private FibonacciService fibonacciService;
 
     @Autowired
     @Qualifier("fixedThreadPool")
@@ -36,13 +35,11 @@ public class ProxyController {
 
     @GetMapping("/fibonacci/{fibonacciNumber}")
     public ResponseEntity<ResponseBodyEmitter> fibonacci(
-            @PathVariable(value = "fibonacciNumber")  @PositiveOrZero Integer number){
+            @PathVariable(value = "fibonacciNumber") @PositiveOrZero Integer number) {
         ResponseBodyEmitter emitter = new ResponseBodyEmitter();
 
-        FibonacciRequest fibonacciRequest = FibonacciRequest.newBuilder().setNumber(number).build();
-
         executor.execute(() -> {
-            Iterator<FibonacciReply> iterator = fibonacciStub.calcFibonacci(fibonacciRequest);
+            Iterator<FibonacciReply> iterator = fibonacciService.calcFibonacci(number);
             logger.info("Proceed fibonacci call with number " + number);
 
             try {
@@ -51,7 +48,7 @@ public class ProxyController {
                 }
 
                 emitter.complete();
-            } catch (IOException e){
+            } catch (IOException e) {
                 logger.error(e.getMessage());
                 emitter.completeWithError(e);
             }

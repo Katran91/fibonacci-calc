@@ -9,8 +9,6 @@ dependencies {
     compile 'net.devh:grpc-server-spring-boot-starter:2.6.2.RELEASE'
     compile project(':grpc-contract')
 
-    testImplementation('org.junit.jupiter:junit-jupiter-api')
-    testRuntimeOnly('org.junit.jupiter:junit-jupiter-engine')
     testImplementation('io.grpc:grpc-testing:1.27.0')
     testImplementation('net.devh:grpc-client-spring-boot-starter:2.6.2.RELEASE')
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
